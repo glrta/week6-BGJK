@@ -55,7 +55,21 @@ function allPosts(postObjArr) {
 }
 
 function home(){
-  
+
+}
+
+function login(){
+  return sharedLayout(
+  `
+    <form class="form" action="login" method="POST">
+      <label for="username"></label>
+      <input id="username" name="username" placeholder="who are you?" required>
+      <label for="password"></label>
+      <input id="password" name="password" required>
+      <button class="form__button" type="submit">Login</button>
+    </form>
+  `
+  )
 }
 
 function submitPage() {
@@ -78,4 +92,4 @@ function missingPage() {
   `;
 }
 
-module.exports = { submitPage, missingPage, allPosts, home };
+module.exports = { submitPage, missingPage, allPosts, home, login };

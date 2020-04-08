@@ -4,6 +4,8 @@ const missingHandler = require("./handlers/missing.js");
 const publicHandler = require("./handlers/public.js");
 const submitGetHandler = require("./handlers/submitGet.js");
 const submitPostHandler = require("./handlers/submitPost.js");
+const loginGetHandler = require('./handlers/loginGet.js')
+const loginPostHandler = require('./handlers/loginPost.js')
 
 function router(request, response) {
   const url = request.url;
