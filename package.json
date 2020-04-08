@@ -27,6 +27,7 @@
     "test": "^0.6.0"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "pg": "^8.0.0"
   }

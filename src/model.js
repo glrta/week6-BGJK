@@ -2,6 +2,23 @@ const db = require("./db/connection.js");
 
 // createUser + hash password
 
+function getUser(username) {
+  return db
+    .query(
+      `
+      SELECT *
+      FROM USERS
+      WHERE users.username=($1)
+      `, [username]
+    )
+    .then(result => {
+      return result.rows
+    })
+    .catch(err => {
+      console.log("Here be error   ", err);
+    });
+}
+
 function getPosts() {
   return db
     .query(
