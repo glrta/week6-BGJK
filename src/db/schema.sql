@@ -26,7 +26,5 @@ INSERT INTO blog_posts (author_id, post) VALUES
   (1, 'This is the best site for cookies'),
   (2, 'Really?'),
   (3, 'Yep - where else can you talk about cookies all day long?'),
-  (4, 'True, Twitter has nothing on us'),
+  (4, 'True, Twitter has nothing on us')
 ;
-
-COMMIT;

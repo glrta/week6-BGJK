@@ -1,5 +1,5 @@
 {
-  "name": "week5-dghp",
+  "name": "week6-bgjk",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
@@ -7,23 +7,24 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "PGDATABASE=cookie_test tape test/*.test.js | tap-spec",
     "start": "node src/server.js",
     "startdev": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fac19/week5-DGHP.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fac19/week5-DGHP/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/fac19/week5-DGHP#readme",
+  "homepage": "",
   "devDependencies": {
     "nodemon": "^2.0.2",
     "tap-spec": "^5.0.0",
+    "tape": "^4.13.2",
     "test": "^0.6.0"
   },
   "dependencies": {
