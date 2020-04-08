@@ -2,6 +2,11 @@ const db = require("./db/connection.js");
 
 // createUser + hash password
 
+function createUser (userProfile) {
+  return db
+  .query("INSERT INTO users(username) VALUES ($1)", [userProfile.username]);
+}
+
 function getPosts() {
   return db
     .query(
