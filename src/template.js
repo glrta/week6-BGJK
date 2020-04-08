@@ -49,9 +49,13 @@ function makeArticle(obj) {
 `;
 }
 
-function home(postObjArr) {
+function allPosts(postObjArr) {
   let str = postObjArr.map(item => makeArticle(item)).join("\n");
   return sharedLayout(str);
+}
+
+function home(){
+  
 }
 
 function submitPage() {
@@ -74,4 +78,4 @@ function missingPage() {
   `;
 }
 
-module.exports = { submitPage, missingPage, home };
+module.exports = { submitPage, missingPage, allPosts, home };
