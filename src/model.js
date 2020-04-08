@@ -1,5 +1,7 @@
 const db = require("./db/connection.js");
 
+// createUser + hash password
+
 function getPosts() {
   return db
     .query(
@@ -13,6 +15,7 @@ function getPosts() {
     });
 }
 
+// review this function: create new post only
 function newPost(message) {
   return db
     .query("INSERT INTO users(username) VALUES($1)", [message.username])
