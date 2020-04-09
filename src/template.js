@@ -64,7 +64,7 @@ function login(error) {
       <input id="username" name="username" placeholder="who are you?" required>
       <label for="password">Password:</label>
       <input id="password" name="password" required>
-      <div>${error ? error : ""}</div>
+      <div class="form_login-failed">${error ? error : ""}</div>
       <button class="form__button" type="submit">Login</button>
     </form>
   `

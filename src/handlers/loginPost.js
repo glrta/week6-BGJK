@@ -12,15 +12,12 @@ function loginPostHandler(req, res) {
     model
       .getUser(loginObject.username)
       .then((userObj) => {
-        //  return userObj.password===loginObject.password;
-        //change to bcrypt once password hashing is working
         return bcrypt.compare(loginObject.password, userObj.password);
       })
       .then((match) => {
         if (!match) {
           res.writeHead(200, { "content-type": "text/html" });
           res.end(templates.login("Login failed!"));
-          // throw new Error("Password mismatch");
         } else {
           res.writeHead(302, { location: "/user_page" });
           res.end();
