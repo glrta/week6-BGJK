@@ -20,7 +20,7 @@
   "bugs": "",
   "homepage": "",
   "devDependencies": {
-    "nodemon": "^2.0.2",
+    "nodemon": "^2.0.3",
     "tap-spec": "^5.0.0",
     "tape": "^4.13.2",
     "test": "^0.6.0"

@@ -1,5 +1,6 @@
 const templates = require("../template");
 const model = require("../model"); //we need the model to check if for the password
+const bcrypt = require("bcryptjs");
 
 function signUpPostHandler(request, response) {
   let body = "";
@@ -9,13 +10,16 @@ function signUpPostHandler(request, response) {
     const loginObject = Object.fromEntries(loginDetails);
     bcrypt
       .genSalt(10)
-      .then((salt) => bcrypt.hash(password, salt))
+      .then((salt) => bcrypt.hash(loginObject.password, salt))
       .then((hash) =>
-        model.createUser({ ...loginObject.username, password: hash })
+        model.createUser({
+          username: [...loginObject.username], //have a think about refactoring to remove the spread operator
+          password: hash,
+        })
       )
       .then(() => {
-        res.writeHead(302, { location: "/user_page" });
-        res.end();
+        response.writeHead(302, { location: "/user_page" });
+        response.end();
       })
       .catch((error) => {
         console.error(error);
@@ -34,4 +38,4 @@ function signUpPostHandler(request, response) {
 // 2b. throw an error message stating 'user already exists'
 // 3. Celebrate!
 
-module.export = signUpPostHandler;
+module.exports = signUpPostHandler;
