@@ -31,8 +31,8 @@ function loginPostHandler(req, res) {
       })
       .catch((error) => {
         console.error(error);
-        response.writeHead(401, { "content-type": "text/html" });
-        response.end(`
+        res.writeHead(401, { "content-type": "text/html" });
+        res.end(`
               <h1>Something went wrong, sorry</h1>
               <p>User not found</p>
             `);

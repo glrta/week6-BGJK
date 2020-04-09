@@ -10,7 +10,7 @@ function submitPostHandler(req, res) {
     model
       .newPost(messageObject)
       .then(() => {
-        res.writeHead(302, { location: "/" });
+        res.writeHead(302, { location: "/all_posts" });
         res.end();
       })
       .catch(err => console.error(err));
