@@ -55,8 +55,37 @@ function allPosts(postObjArr) {
 }
 
 function home(){
-  
+
 }
+
+function login(){
+  return sharedLayout(
+  `
+    <form class="form" action="login" method="POST">
+      <label for="username">Username:</label>
+      <input id="username" name="username" placeholder="who are you?" required>
+      <label for="password">Password:</label>
+      <input id="password" name="password" required>
+      <button class="form__button" type="submit">Login</button>
+    </form>
+  `
+  )
+}
+
+function signup(){
+  return sharedLayout(
+  `
+    <form class="form" action="login" method="POST">
+      <label for="username">Username:</label>
+      <input id="username" name="username" placeholder="who are you?" required>
+      <label for="password">Password:</label>
+      <input id="password" name="password" required>
+      <button class="form__button" type="submit">Sign Up</button>
+    </form>
+  `
+  )
+}
+
 
 function submitPage() {
   return sharedLayout(
@@ -72,10 +101,12 @@ function submitPage() {
   );
 }
 
+
+
 function missingPage() {
   return `
   <img class="missing-resource-image" src="https://media.giphy.com/media/VwoJkTfZAUBSU/giphy.gif" alt="404 resource not found">
   `;
 }
 
-module.exports = { submitPage, missingPage, allPosts, home };
+module.exports = { submitPage, missingPage, allPosts, home, login, signup };

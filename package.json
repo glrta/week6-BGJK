@@ -9,7 +9,7 @@
   "scripts": {
     "test": "PGDATABASE=cookie_test tape test/test.js | tap-spec",
     "start": "node src/server.js",
-    "startdev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "test": "^0.6.0"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "pg": "^8.0.0"
   }

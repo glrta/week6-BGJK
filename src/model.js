@@ -14,6 +14,23 @@ function createUser (newUser) {
   });
 }
 
+function getUser(username) {
+  return db
+    .query(
+      `
+      SELECT *
+      FROM USERS
+      WHERE users.username=($1)
+      `, [username]
+    )
+    .then(result => {
+      return result.rows[0] //check if this all works
+    })
+    .catch(err => {
+      console.log("Here be error   ", err);
+    });
+}
+
 function getPosts() {
   return db
     .query(
@@ -59,4 +76,4 @@ function deletePost(postId, res) {
  
 }
 
-module.exports = { newPost, getPosts, deletePost, createUser };
+module.exports = { newPost, getPosts, deletePost, getUser, createUser };
