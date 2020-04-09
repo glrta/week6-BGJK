@@ -25,17 +25,17 @@ function userPageHandler(req, res) {
     if (!jwt) return send401();
 
     return verify(jwt, secret, (err, jwt) => {
+      // console.log(jwt)
       if (err) {
         return send401();
       } else {
         res.writeHead(200, { "content-type": "text/html" });
-        res.end(templates.displayUserPosts());
-
+        res.end();
         // model
-        // .getUserPosts()
+        // .getUserPosts(jwt.username)
         // .then(result => result.rows)
         // .then(posts => {
-        //   response.end(templates.displayUserPosts(posts));
+        //   res.end(templates.displayUserPosts(posts));
         // })
         // .catch(console.error);
       }

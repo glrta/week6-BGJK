@@ -47,39 +47,44 @@ function getPosts() {
     });
 }
 
-function getUserPosts() {
+function getUserPosts(user) {
   return db
-    .query(
-      `
-        SELECT *
-        FROM users
-        INNER JOIN blog_posts ON users.id = blog_posts.author_id; `
-    )
+  .query(`SELECT id FROM users where username=($1)`, [user])
+  .then((userId) => {
+    db.query(
+        `
+          SELECT *
+          FROM users
+          INNER JOIN blog_posts ON users.id = blog_posts.author_id
+          WHERE users.id=($1)`,
+          [userId]
+      ).then((result)=>
+        {
+          console.log(result.rows)          
+        }
+      ).catch(console.err)
+  })
     .catch((err) => {
       console.log("Here be error   ", err);
     });
 }
 
-// review this function: create new post only
-// should check user's id & authetication?
-// then add post to database with the correct author_id
-function newPost(message) {
-  return db
-    .query("INSERT INTO users(username) VALUES($1)", [message.username])
-    .then(() => {
-      return db
-        .query(`SELECT id FROM users where username=($1)`, [message.username])
-        .then((item) => {
-          return item.rows.map((obj) => obj.id);
-        })
-        .then((idArr) => {
-          return db.query(
-            "INSERT INTO blog_posts(author_id, post) VALUES($1, $2)",
-            [idArr[0], message.post_text]
-          );
-        });
-    });
+
+function newPost(username, message) {
+  console.log(username)
+  return db.query(`SELECT id FROM users WHERE username=($1)`, [username])
+    .then((item) => {
+      console.log(item.rows);
+      return item.rows[0].id
+    })
+    .then((id) => {
+      return db.query(
+        "INSERT INTO blog_posts(author_id, post) VALUES($1, $2)",
+          [id, message.post_text]
+        );
+    })
 }
+
 
 function deletePost(postId, res) {
   db.query("DELETE FROM blog_posts WHERE ($1)=id", [postId])
