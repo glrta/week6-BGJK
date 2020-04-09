@@ -58,32 +58,28 @@ function home(){
 
 }
 
-function login(){
+function userDetailForm(button){
   return sharedLayout(
   `
     <form class="form" action="login" method="POST">
-      <label for="username">Username:</label>
-      <input id="username" name="username" placeholder="who are you?" required>
-      <label for="password">Password:</label>
-      <input id="password" name="password" required>
-      <button class="form__button" type="submit">Login</button>
+      <label for="username">Username<span aria-hidden="true">*</span>:</label>
+      <input id="username" name="username" placeholder="who are you?" required />
+      <label for="password">Password<span aria-hidden="true">*</span>:</label>
+      <p id="passwordRequirements">Passwords must contain at least one letter and one number, and contain at least 8 characters.
+      </p>
+      <input type="password" aria-describedby="passwordRequirements" id="password" name="password" required pattern="(?=.*[A-z])(?=.*\d)[A-z\d]+" minlength="8"/>
+      ${button}
     </form>
+    <script src="script.js"></scipt>
   `
   )
 }
 
+function login(){
+ return userDetailForm(`<button class="form__button" type="submit">Login</button>`);
+}
 function signup(){
-  return sharedLayout(
-  `
-    <form class="form" action="login" method="POST">
-      <label for="username">Username:</label>
-      <input id="username" name="username" placeholder="who are you?" required>
-      <label for="password">Password:</label>
-      <input id="password" name="password" required>
-      <button class="form__button" type="submit">Sign Up</button>
-    </form>
-  `
-  )
+  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`);
 }
 
 
@@ -92,7 +88,7 @@ function submitPage() {
     `
     <form class="form" action="submit" method="POST">
       <label for="username">Author: </label>
-      <input id="username" name="username" placeholder="who are you?" required>
+      <input id="username" name="username" placeholder="who are you?" required />
       <label for="post_text">Write Post</label>
       <textarea id="post_text" rows="10" cols="50" name="post_text" aria-label="write blog here" placeholder="what are you thinking about?" required></textarea>
       <button class="form__button" type="submit">Add Post</button>
