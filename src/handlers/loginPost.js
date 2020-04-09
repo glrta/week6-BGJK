@@ -1,6 +1,8 @@
 const templates = require("../template");
 const model = require("../model");
 const bcrypt = require("bcryptjs");
+const { parse } = require('cookie');
+const { sign, verify } = require('jsonwebtoken');
 const secret = "couvebrocolis";
 
 function loginPostHandler(req, res) {
@@ -19,7 +21,11 @@ function loginPostHandler(req, res) {
           res.writeHead(200, { "content-type": "text/html" });
           res.end(templates.login("Login failed!"));
         } else {
-          res.writeHead(302, { location: "/user_page" });
+          const cookie = sign(loginObject, secret)
+          res.writeHead(302, { 
+            location: "/user_page",
+            'Set-Cookie': `jwt=${cookie}; HttpOnly`
+          });
           res.end();
         }
       })
@@ -35,3 +41,7 @@ function loginPostHandler(req, res) {
 }
 
 module.exports = loginPostHandler;
+
+
+
+  
