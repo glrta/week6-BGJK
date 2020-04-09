@@ -73,7 +73,7 @@ function login() {
 function signup() {
   return sharedLayout(
     `
-    <form class="form" action="login" method="POST">
+    <form class="form" action="signup" method="POST">
       <label for="username">Username:</label>
       <input id="username" name="username" placeholder="who are you?" required>
       <label for="password">Password:</label>

@@ -17,7 +17,7 @@ CREATE TABLE blog_posts (
 
 INSERT INTO users (username, password) VALUES 
   ('gio', '123'), 
-  ('campbel', '234'), 
+  ('campbel', ''234''), 
   ('vatsal', '567'), 
   ('lizzy', '567')
 ;
