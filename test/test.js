@@ -31,6 +31,25 @@ test("Check to see if createUser adds new username", t => {
     })
 });
 
+test("Check to see if username has a corresponding password", t => {
+  const newUser = {
+    username: "Donald's_toupee",
+    password: "cheese"
+  };  
+  build().then(() => {
+    createUser(newUser)
+      .then((result) => {
+        const userProfile = result;
+        t.equal(userProfile.rows[0].password, "cheese")
+        t.end()
+      })
+      .catch(error => {
+        t.error(error)
+        t.end()
+      })   
+    })
+});
+
 
 
 
