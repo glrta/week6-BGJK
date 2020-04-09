@@ -13,7 +13,7 @@ function signUpPostHandler(request, response) {
       .then((salt) => bcrypt.hash(loginObject.password, salt))
       .then((hash) =>
         model.createUser({
-          username: [...loginObject.username], //have a think about refactoring to remove the spread operator
+          username: loginObject.username, //have a think about refactoring to remove the spread operator
           password: hash,
         })
       )
