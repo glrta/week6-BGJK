@@ -23,7 +23,6 @@ function sharedLayout(bodyContent) {
                 ${bodyContent}
             </div>
         </body>
-        <script src="public/main.js"></script>
     </html>
     `;
 }
@@ -58,28 +57,30 @@ function home(){
 
 }
 
-function userDetailForm(button){
+function userDetailForm(button, action){
   return sharedLayout(
   `
-    <form class="form" action="login" method="POST">
+    <form id=userDetailForm class="form" action=${action} method="POST">
       <label for="username">Username<span aria-hidden="true">*</span>:</label>
       <input id="username" name="username" placeholder="who are you?" required />
+      <div id="usernameError" class="error"></div>
       <label for="password">Password<span aria-hidden="true">*</span>:</label>
-      <p id="passwordRequirements">Passwords must contain at least one letter and one number, and contain at least 8 characters.
+      <p id="passwordRequirements">Password must contain at least one letter, one capital letter, one number, and contain at least 8 characters.
       </p>
-      <input type="password" aria-describedby="passwordRequirements" id="password" name="password" required pattern="(?=.*[A-z])(?=.*\d)[A-z\d]+" minlength="8"/>
+      <input type="password" aria-describedby="passwordRequirements" id="password" name="password"  required minlength="8"/>  <!-- pattern="(?=.*[A-z])(?=.*\d)[A-z\d]+" -->
+      <div id="passwordError" class="error"></div>
       ${button}
     </form>
-    <script src="script.js"></scipt>
+    <script src="public/script.js"></script>
   `
   )
-}
+}// regex pattern commented out in html above, because causing issues....revisit later 
 
 function login(){
- return userDetailForm(`<button class="form__button" type="submit">Login</button>`);
+ return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login');
 }
 function signup(){
-  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`);
+  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup');
 }
 
 
