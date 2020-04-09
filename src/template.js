@@ -9,10 +9,10 @@ function sharedLayout(bodyContent) {
             <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
             <script src="https://kit.fontawesome.com/794b746eef.js" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="./public/main.css">
-            <title>Pink Punk</title>
+            <title>The Cookie Jar</title>
         </head>
             <header>
-              <h1 class="headerTitle glow">Pink Punk</h1>
+              <h1 class="headerTitle glow">The Cookie Jar</h1>
                 <nav class="navbar">
                   <a href="/" class="navbar__links" aria-label="list of all posts">Home</a>
                   <a href="/all_posts" class="navbar__links" aria-label="list of all posts">See All the Posts</a>
@@ -58,13 +58,23 @@ function displayUserPosts(postObjArr) {
 }
 
 function home() {
-  return sharedLayout(
-    `
-    `
-  )
+  let cookieStr = `
+  <div class="cookie">
+    <div class="choco-chip left left--1"></div>
+    <div class="choco-chip left left--2"></div>
+    <div class="choco-chip center center--1"></div>
+    <div class="choco-chip center center--2"></div>
+    <div class="choco-chip center center--3"></div>
+    <div class="choco-chip right right--1"></div>
+    <div class="choco-chip right right--2"></div>
+  </div>
+  <script>
+    const container = document.querySelector('.container'); 
+    container.classList.add('home-container');    
+  </script>
+  `;
+  return sharedLayout(cookieStr);
 }
-
-
 
 function userDetailForm(button, action, error) {
   return sharedLayout(
@@ -77,7 +87,7 @@ function userDetailForm(button, action, error) {
       <p id="passwordRequirements">Password must contain at least one letter, one capital letter, one number, and contain at least 8 characters.
       </p>
       <input type="password" aria-describedby="passwordRequirements" id="password" name="password"  required minlength="8"/>  <!-- pattern="(?=.*[A-z])(?=.*\d)[A-z\d]+" -->
-      <div id="passwordError" class="error">${error ? error : ""}</div>
+      <div id="passwordError" class="error">${error}</div>
       ${button}
     </form>
     <script src="public/script.js"></script>
@@ -86,12 +96,13 @@ function userDetailForm(button, action, error) {
 } // regex pattern commented out in html above, because causing issues....revisit later 
 
 function login(error) {
-  return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', `${error}`);
+  let err = error ? `Password does not match ${error}` : "";
+  return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', err);
 }
 
 
 function signup() {
-  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup');
+  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup', "");
 }
 
 function submitPage() {
