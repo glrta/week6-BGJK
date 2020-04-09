@@ -72,6 +72,21 @@ function login(){
   )
 }
 
+function signup(){
+  return sharedLayout(
+  `
+    <form class="form" action="login" method="POST">
+      <label for="username"></label>
+      <input id="username" name="username" placeholder="who are you?" required>
+      <label for="password"></label>
+      <input id="password" name="password" required>
+      <button class="form__button" type="submit">Sign Up</button>
+    </form>
+  `
+  )
+}
+
+
 function submitPage() {
   return sharedLayout(
     `
@@ -86,10 +101,12 @@ function submitPage() {
   );
 }
 
+
+
 function missingPage() {
   return `
   <img class="missing-resource-image" src="https://media.giphy.com/media/VwoJkTfZAUBSU/giphy.gif" alt="404 resource not found">
   `;
 }
 
-module.exports = { submitPage, missingPage, allPosts, home, login };
+module.exports = { submitPage, missingPage, allPosts, home, login, signup };
