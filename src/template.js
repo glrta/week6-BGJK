@@ -9,13 +9,17 @@ function sharedLayout(bodyContent) {
             <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
             <script src="https://kit.fontawesome.com/794b746eef.js" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="./public/main.css">
-            <title>The cookie jar</title>
+            <title>The Cookie Jar</title>
         </head>
             <header>
-              <h1 class="headerTitle glow">Pink Punk</h1>
+              <h1 class="headerTitle glow">The Cookie Jar</h1>
                 <nav class="navbar">
-                  <a href="/" class="navbar__links" aria-label="list of all posts">read</a>
-                  <a href="/submit" class="navbar__links" aria-label="write a new post">write</a>
+                  <a href="/" class="navbar__links" aria-label="list of all posts">Home</a>
+                  <a href="/all_posts" class="navbar__links" aria-label="list of all posts">See All the Posts</a>
+                  <a href="/user_page" class="navbar__links" aria-label="list of your posts">See Your Posts</a>
+                  <a href="/submit" class="navbar__links" aria-label="write a new post">Submit New Post</a>
+                  <a href="/login" class="navbar__links" aria-label="Login">Login</a>
+                  <a href="/signup" class="navbar__links" aria-label="Sgn up">Sign up</a>
                 </nav>
             </header>
         <body>
@@ -48,18 +52,28 @@ function makeArticle(obj) {
 `;
 }
 
-function allPosts(postObjArr) {
-  let str = postObjArr.map((item) => makeArticle(item)).join("\n");
-  return sharedLayout(str);
+function home() {
+  let cookieStr = `
+  <div class="cookie">
+    <div class="choco-chip left left--1"></div>
+    <div class="choco-chip left left--2"></div>
+    <div class="choco-chip center center--1"></div>
+    <div class="choco-chip center center--2"></div>
+    <div class="choco-chip center center--3"></div>
+    <div class="choco-chip right right--1"></div>
+    <div class="choco-chip right right--2"></div>
+  </div>
+  <script>
+    const container = document.querySelector('.container'); 
+    container.classList.add('home-container');    
+  </script>
+  `;
+  return sharedLayout(cookieStr);
 }
 
-function home() {}
-
-
-
-function userDetailForm(button, action, error){
+function userDetailForm(button, action, error) {
   return sharedLayout(
-  `
+    `
     <form id=userDetailForm class="form" action=${action} method="POST">
       <label for="username">Username<span aria-hidden="true">*</span>:</label>
       <input id="username" name="username" placeholder="who are you?" required />
@@ -68,19 +82,22 @@ function userDetailForm(button, action, error){
       <p id="passwordRequirements">Password must contain at least one letter, one capital letter, one number, and contain at least 8 characters.
       </p>
       <input type="password" aria-describedby="passwordRequirements" id="password" name="password"  required minlength="8"/>  <!-- pattern="(?=.*[A-z])(?=.*\d)[A-z\d]+" -->
-      <div id="passwordError" class="error">${error ? error : ""}</div>
+      <div id="passwordError" class="error">${error}</div>
       ${button}
     </form>
     <script src="public/script.js"></script>
   `
   )
-}// regex pattern commented out in html above, because causing issues....revisit later 
+} // regex pattern commented out in html above, because causing issues....revisit later 
 
-function login(error){
- return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', `${error}`);
+function login(error) {
+  let err = error ? `Password does not match ${error}` : "";
+  return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', err);
 }
-function signup(){
-  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup');
+
+
+function signup() {
+  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup', "");
 }
 
 function submitPage() {
@@ -103,6 +120,11 @@ function missingPage() {
   `;
 }
 
+function allPosts(postObjArr) {
+  let str = postObjArr.map((item) => makeArticle(item)).join("\n");
+  return sharedLayout(str);
+}
+
 function displayUserPosts() {
   return `
     <h2> Your posts go here </h2>
@@ -112,12 +134,18 @@ function displayUserPosts() {
   `;
 }
 
+// function displayUserPosts(postObjArr) {
+//   let str = postObjArr.map((item) => makeArticle(item)).join("\n");
+//   return sharedLayout(str);
+// }
+
 module.exports = {
   submitPage,
   missingPage,
   allPosts,
   home,
   displayUserPosts,
+  userDetailForm,
   login,
-  signup,
+  signup
 };

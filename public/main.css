@@ -1,6 +1,10 @@
 :root {
-  --main-pink: rgb(236, 95, 133);
-  --secondary-dark: rgb(18, 33, 81);
+  /* --main: rgb(236, 95, 133);
+  --secondary: rgb(18, 33, 81); */
+  --main: hsla(28, 79%, 65%, 0.892);
+  --secondary: hsl(0, 0%, 100%);
+  --cookie-col: hsl(39, 93%, 76%);
+  --choco-chip-col: hsl(28, 48%, 29%);
 }
 
 * {
@@ -9,7 +13,7 @@
 }
 
 body {
-  background-color: var(--secondary-dark);
+  background-color: var(--secondary);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,14 +26,14 @@ header {
 }
 
 .headerTitle {
+  padding: 0.5em;
   font-family: "Fugaz One", cursive;
+  text-align: center;
+  color: var(--main);
 }
 
 /* glow effect */
 .glow {
-  font-size: 3rem;
-  color: white;
-  text-align: center;
   -webkit-animation: glow 1s ease-in-out infinite alternate;
   -moz-animation: glow 1s ease-in-out infinite alternate;
   animation: glow 1s ease-in-out infinite alternate;
@@ -37,15 +41,16 @@ header {
 
 @-webkit-keyframes glow {
   from {
-    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px var(--secondary-dark),
-      0 0 40px var(--secondary-dark), 0 0 50px var(--secondary-dark),
-      0 0 60px var(--secondary-dark), 0 0 70px var(--secondary-dark);
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px var(--secondary),
+      0 0 40px var(--secondary), 0 0 50px var(--secondary),
+      0 0 60px var(--secondary), 0 0 70px var(--secondary);
   }
+
   to {
-    text-shadow: 0 0 20px white, 0 0 30px var(--main-pink),
-      0 0 40px var(--main-pink), 0 0 50px var(--main-pink),
-      0 0 60px var(--main-pink), 0 0 70px var(--main-pink),
-      0 0 80px var(--main-pink);
+    text-shadow: 0 0 20px white, 0 0 30px var(--cookie-col),
+      0 0 40px var(--cookie-col), 0 0 50px var(--cookie-col),
+      0 0 60px var(--cookie-col), 0 0 70px var(--cookie-col),
+      0 0 80px var(--cookie-col);
   }
 }
 
@@ -55,33 +60,114 @@ header {
   display: flex;
   justify-content: center;
   text-transform: uppercase;
-  color: var(--main-pink);
+  color: var(--main);
   padding: 1rem;
 }
 
 .navbar__links {
-  color: var(--main-pink);
+  color: var(--main);
   padding: 0.5rem;
   font-size: 0.9rem;
   text-decoration: none;
-  border: 1px solid var(--main-pink);
+  border: 1px solid var(--main);
   transition: 0.2s ease-in-out;
 }
 
 .navbar__links:hover {
-  background-color: var(--main-pink);
-  color: var(--secondary-dark);
+  background-color: var(--main);
+  color: var(--secondary);
 }
 
 .container {
   width: 100vw;
-  background-color: var(--main-pink);
+  background-color: var(--main);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
   padding: 3rem;
+}
+
+.home-container {
+  background-color: var(--secondary);
+}
+
+/* cookie body */
+.cookie {
+  width: 45vw;
+  height: 45vw;
+  margin: 2rem;
+  border-radius: 50%;
+  background-image: linear-gradient(to top right, hsl(39, 93%, 76%), hsl(39, 61%, 60%), hsla(39, 46%, 55%, 0.762), hsl(39, 93%, 76%));
+  box-shadow: 0px 0px 30px 5px rgb(85, 59, 9);
+  background-color: var(--cookie-col);
+
+  /* grid properties */
+  display: inline-grid;
+  grid-template-columns: 12vw 12vw 12vw;
+  grid-template-areas:
+    '. center-top right-top'
+    'left-top center-mid right-bot'
+    'left-bot center-bot .';
+  grid-column-gap: 3vw;
+  justify-items: center;
+  align-items: center;
+}
+
+
+/* choco chips */
+.choco-chip {
+  border-radius: 50%;
+  background-color: var(--choco-chip-col);
+  width: 5vw;
+  height: 5vw;
+}
+
+.center {}
+
+.center--1 {
+  grid-area: center-top;
+}
+
+.center--2 {
+  grid-area: center-mid;
+  position: relative;
+  right: 10px;
+}
+
+.center--3 {
+  grid-area: center-bot;
+}
+
+.right {
+  position: relative;
+  right: 30px;
+  top: 40px;
+}
+
+.right--1 {
+  grid-area: right-top;
+}
+
+.right--2 {
+  grid-area: right-bot;
+  position: relative;
+  top: 50px;
+}
+
+.left {
+  position: relative;
+  bottom: 60px;
+  left: 30px;
+}
+
+.left--1 {
+  grid-area: left-top;
+}
+
+.left--2 {
+  grid-area: left-bot;
 }
 
 .post {
@@ -96,8 +182,8 @@ header {
   pointer-events: none;
   border-radius: 5px;
   transition: 0.2s ease-in-out;
-  /* border: 1px solid var(--secondary-dark);
-  border-top: 1px solid var(--secondary-dark); */
+  /* border: 1px solid var(--secondary);
+  border-top: 1px solid var(--secondary); */
 }
 
 .post p {
@@ -112,22 +198,22 @@ header {
   position: absolute;
   bottom: 0;
   right: 0;
-  color: var(--secondary-dark);
+  color: var(--secondary);
   pointer-events: auto;
 }
 
 .post:hover {
-  background-color: var(--secondary-dark);
-  color: var(--main-pink);
+  background-color: var(--secondary);
+  color: var(--main);
 }
 
 .post:hover .post__remove-button {
-  color: var(--main-pink);
+  color: var(--main);
 }
 
 .post__author {
-  background-color: var(--secondary-dark);
-  color: var(--main-pink);
+  background-color: var(--secondary);
+  color: var(--main);
 }
 
 .post__textContent {
@@ -147,7 +233,7 @@ header {
   width: 90%;
 }
 
-.form > * {
+.form>* {
   padding: 1rem;
 }
 
@@ -156,17 +242,17 @@ form button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  background-color: var(--secondary-dark);
-  color: var(--main-pink);
+  background-color: var(--secondary);
+  color: var(--main);
   transition: 0.2s ease-in-out;
   text-transform: uppercase;
   font-weight: bold;
 }
 
 form button:hover {
-  background-color: var(--main-pink);
-  color: var(--secondary-dark);
-  border: 1px solid var(--secondary-dark);
+  background-color: var(--main);
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
 }
 
 /* iPads (portrait) ----------- */
@@ -175,9 +261,11 @@ form button:hover {
     width: 80vw;
     padding: 4rem;
   }
+
   .glow {
     font-size: 4rem;
   }
+
   .navbar {
     padding: 1.5rem;
   }
@@ -186,16 +274,19 @@ form button:hover {
     padding: 0.9rem;
     font-size: 1.2rem;
   }
+
   .form {
     width: 80%;
   }
 }
+
 /* Desktops and laptops ----------- */
 @media only screen and (min-width: 1224px) {
   .container {
     width: 60vw;
     padding: 5rem;
   }
+
   .glow {
     font-size: 5rem;
   }
