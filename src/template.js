@@ -9,7 +9,7 @@ function sharedLayout(bodyContent) {
             <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
             <script src="https://kit.fontawesome.com/794b746eef.js" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="./public/main.css">
-            <title>Pink Punk</title>
+            <title>The cookie jar</title>
         </head>
             <header>
               <h1 class="headerTitle glow">Pink Punk</h1>
@@ -106,6 +106,9 @@ function missingPage() {
 function displayUserPosts() {
   return `
     <h2> Your posts go here </h2>
+    <form action='/logout' method='POST'>
+    <button type="submit">Logout</button>
+    </form>
   `;
 }
 

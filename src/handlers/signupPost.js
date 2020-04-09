@@ -1,25 +1,32 @@
 const templates = require("../template");
 const model = require("../model"); //we need the model to check if for the password
 const bcrypt = require("bcryptjs");
+const { parse } = require('cookie');
+const { sign, verify } = require('jsonwebtoken');
+const secret = 'couvebrocolis'
 
 function signUpPostHandler(request, response) {
   let body = "";
   request.on("data", (chunk) => (body += chunk));
   request.on("end", () => {
-    const loginDetails = new URLSearchParams(body);
-    const loginObject = Object.fromEntries(loginDetails);
+    const signupDetails = new URLSearchParams(body);
+    const signupObject = Object.fromEntries(signupDetails);
     bcrypt
       .genSalt(10)
-      .then((salt) => bcrypt.hash(loginObject.password, salt))
+      .then((salt) => bcrypt.hash(signupObject.password, salt))
       .then((hash) =>
         model.createUser({
-          username: loginObject.username, //have a think about refactoring to remove the spread operator
+          username: signupObject.username, //have a think about refactoring to remove the spread operator
           password: hash,
         })
       )
       .then(() => {
-        response.writeHead(302, { location: "/user_page" });
-        response.end();
+        const cookie = sign(signupObject, secret)
+        response.writeHead(302, { 
+          location: "/user_page",
+          'Set-Cookie': `jwt=${cookie}; HttpOnly`
+        });
+        response.end()
       })
       .catch((error) => {
         console.error(error);
