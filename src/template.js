@@ -52,11 +52,6 @@ function makeArticle(obj) {
 `;
 }
 
-function displayUserPosts(postObjArr) {
-  let str = postObjArr.map((item) => makeArticle(item)).join("\n");
-  return sharedLayout(str);
-}
-
 function home() {
   let cookieStr = `
   <div class="cookie">
@@ -129,6 +124,20 @@ function allPosts(postObjArr) {
   let str = postObjArr.map((item) => makeArticle(item)).join("\n");
   return sharedLayout(str);
 }
+
+function displayUserPosts() {
+  return `
+    <h2> Your posts go here </h2>
+    <form action='/logout' method='POST'>
+    <button type="submit">Logout</button>
+    </form>
+  `;
+}
+
+// function displayUserPosts(postObjArr) {
+//   let str = postObjArr.map((item) => makeArticle(item)).join("\n");
+//   return sharedLayout(str);
+// }
 
 module.exports = {
   submitPage,
