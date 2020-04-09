@@ -14,8 +14,12 @@ function sharedLayout(bodyContent) {
             <header>
               <h1 class="headerTitle glow">Pink Punk</h1>
                 <nav class="navbar">
-                  <a href="/" class="navbar__links" aria-label="list of all posts">read</a>
-                  <a href="/submit" class="navbar__links" aria-label="write a new post">write</a>
+                  <a href="/" class="navbar__links" aria-label="list of all posts">Home</a>
+                  <a href="/all_posts" class="navbar__links" aria-label="list of all posts">See All the Posts</a>
+                  <a href="/user_page" class="navbar__links" aria-label="list of your posts">See Your Posts</a>
+                  <a href="/submit" class="navbar__links" aria-label="write a new post">Submit New Post</a>
+                  <a href="/login" class="navbar__links" aria-label="Login">Login</a>
+                  <a href="/signup" class="navbar__links" aria-label="Sgn up">Sign up</a>
                 </nav>
             </header>
         <body>
@@ -48,18 +52,23 @@ function makeArticle(obj) {
 `;
 }
 
-function allPosts(postObjArr) {
+function displayUserPosts(postObjArr) {
   let str = postObjArr.map((item) => makeArticle(item)).join("\n");
   return sharedLayout(str);
 }
 
-function home() {}
-
-
-
-function userDetailForm(button, action, error){
+function home() {
   return sharedLayout(
-  `
+    `
+    `
+  )
+}
+
+
+
+function userDetailForm(button, action, error) {
+  return sharedLayout(
+    `
     <form id=userDetailForm class="form" action=${action} method="POST">
       <label for="username">Username<span aria-hidden="true">*</span>:</label>
       <input id="username" name="username" placeholder="who are you?" required />
@@ -74,12 +83,14 @@ function userDetailForm(button, action, error){
     <script src="public/script.js"></script>
   `
   )
-}// regex pattern commented out in html above, because causing issues....revisit later 
+} // regex pattern commented out in html above, because causing issues....revisit later 
 
-function login(error){
- return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', `${error}`);
+function login(error) {
+  return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', `${error}`);
 }
-function signup(){
+
+
+function signup() {
   return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup');
 }
 
@@ -103,10 +114,9 @@ function missingPage() {
   `;
 }
 
-function displayUserPosts() {
-  return `
-    <h2> Your posts go here </h2>
-  `;
+function allPosts(postObjArr) {
+  let str = postObjArr.map((item) => makeArticle(item)).join("\n");
+  return sharedLayout(str);
 }
 
 module.exports = {
@@ -115,6 +125,7 @@ module.exports = {
   allPosts,
   home,
   displayUserPosts,
+  userDetailForm,
   login,
-  signup,
+  signup
 };

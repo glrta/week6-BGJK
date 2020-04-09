@@ -1,8 +1,15 @@
 const templates = require("../template");
+const db = require("../db/connection.js");
+const model = require("../model.js");
 
 function userPageHandler(request, response) {
-  response.writeHead(200, { "content-type": "text/html" });
-  response.end('<h1>User Page</h1>');
+  model
+    .getUserPosts()
+    .then(result => result.rows)
+    .then(posts => {
+      response.end(templates.displayUserPosts(posts));
+    })
+    .catch(console.error);
 }
 
 module.exports = userPageHandler;

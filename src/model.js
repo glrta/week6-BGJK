@@ -47,6 +47,19 @@ function getPosts() {
     });
 }
 
+function getUserPosts() {
+  return db
+    .query(
+      `
+        SELECT *
+        FROM users
+        INNER JOIN blog_posts ON users.id = blog_posts.author_id; `
+    )
+    .catch((err) => {
+      console.log("Here be error   ", err);
+    });
+}
+
 // review this function: create new post only
 // should check user's id & authetication?
 // then add post to database with the correct author_id
@@ -71,11 +84,20 @@ function newPost(message) {
 function deletePost(postId, res) {
   db.query("DELETE FROM blog_posts WHERE ($1)=id", [postId])
     .then(() => {
-      res.writeHead(302, { location: "/" });
-      // res.writeHead(200);
+      res.writeHead(302, {
+        location: "/"
+      });
+      // res.writeHead(200
       res.end();
     })
     .catch(console.log);
 }
 
-module.exports = { newPost, getPosts, deletePost, getUser, createUser };
+module.exports = {
+  newPost,
+  getPosts,
+  deletePost,
+  getUser,
+  createUser,
+  getUserPosts
+};
