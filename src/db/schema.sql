@@ -28,3 +28,5 @@ INSERT INTO blog_posts (author_id, post) VALUES
   (3, 'Yep - where else can you talk about cookies all day long?'),
   (4, 'True, Twitter has nothing on us')
 ;
+
+COMMIT;

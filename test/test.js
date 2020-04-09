@@ -8,38 +8,51 @@ const {
     getPosts,
     deletePost,
     createUser
-} = require('/model.js');
+} = require('../src/model');
 
-test("Check to see if createUser function exists", t => {
-    build().then(() => {
-        createUser()
-            .then(username => {
-                console.log(username)
-            t.equal(username, "Donald's_toupee")
-            t.end()
-            })
-            .catch(error )
-           
+
+
+test("Check to see if createUser adds new username", t => {
+  const newUser = {
+    username: "jjj",
+    password: "kkk"
+  };  
+  build().then(() => {
+    createUser(newUser)
+      .then((result) => {
+        const userProfile = result;
+        console.log(userProfile)
+        t.equal(userProfile.rows[0], "Donald's_toupee")
+        t.end()
+      })
+      .catch(error => {
+        t.error(error)
+        t.end()
+      })   
     })
 });
 
-test('Can get recipe titles!', t => {
-    build().then(() => {
-      getTitles()
-        .then(title => {
-          const firstTitle = title[0]
-          t.equal(firstTitle.recipetitle, 'Pesto pasta')
-          t.equal(title.length, 3)
-          t.end()
-        })
-        .catch(error => {
-          t.error(error)
-          t.end()
-        })
-    })
-  })
+
+
+
+// test('Can get recipe titles!', t => {
+//     build().then(() => {
+//       getTitles()
+//         .then(title => {
+//           const firstTitle = title[0]
+//           t.equal(firstTitle.recipetitle, 'Pesto pasta')
+//           t.equal(title.length, 3)
+//           t.end()
+//         })
+//         .catch(error => {
+//           t.error(error)
+//           t.end()
+//         })
+//     })
+//   })
 
 // test("Check model is exporting the function deleteListing", t => {
 //   t.equal("deleteListing" in model , true);
 //   t.end();
 // });
+

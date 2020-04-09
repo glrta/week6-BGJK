@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "PGDATABASE=cookie_test tape test/*.test.js | tap-spec",
+    "test": "tape test/test.js | tap-spec",
     "start": "node src/server.js",
     "startdev": "nodemon src/server.js"
   },
@@ -17,9 +17,7 @@
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": ""
-  },
+  "bugs": "",
   "homepage": "",
   "devDependencies": {
     "nodemon": "^2.0.2",
