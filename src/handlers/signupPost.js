@@ -1,4 +1,3 @@
-
 const templates = require("../template");
 
 function signUpPostHandler(request, response) {
@@ -7,3 +6,8 @@ function signUpPostHandler(request, response) {
 }
 
 module.exports = signUpPostHandler;
+
+// check user doesn't exist already in users
+// hash password
+// insert to database
+

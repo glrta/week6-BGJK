@@ -1,6 +1,18 @@
 const db = require("./db/connection.js");
 
-// createUser + hash password
+// createUser function:
+// check user doesn't exist already in users
+// hash password
+// insert to database
+
+function createUser (newUser) {
+  return db
+    .query("INSERT INTO users(username, password) VALUES (($1),($2))", [newUser.username, newUser.password])
+  .then(() => {
+    return db
+    .query(`SELECT username, password FROM users WHERE username = ($1)`, [newUser.username])
+  });
+}
 
 function getUser(username) {
   return db
@@ -33,6 +45,8 @@ function getPosts() {
 }
 
 // review this function: create new post only
+// should check user's id & authetication?
+// then add post to database with the correct author_id
 function newPost(message) {
   return db
     .query("INSERT INTO users(username) VALUES($1)", [message.username])
@@ -62,4 +76,4 @@ function deletePost(postId, res) {
  
 }
 
-module.exports = { newPost, getPosts, deletePost, getUser };
+module.exports = { newPost, getPosts, deletePost, getUser, createUser };
