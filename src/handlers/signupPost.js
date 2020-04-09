@@ -17,7 +17,7 @@ function signupPostHandler(request, response) {
 
   //   response.writeHead(200, { "content-type": "text/html" });
   //   response.end(template.displayUserPost);
-}
+
 // 1. check user doesn't exist already in users in our request parameter which will be sent from our post request
 // 2. Access the username from the object and check it against our user's table.
 // 2a. If user is new, hash password, add user/password to users table and send to displayUsersPost 200, else

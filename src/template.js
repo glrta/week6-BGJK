@@ -56,6 +56,34 @@ function allPosts(postObjArr) {
 
 function home() {}
 
+function login() {
+  return sharedLayout(
+    `
+    <form class="form" action="login" method="POST">
+      <label for="username">Username:</label>
+      <input id="username" name="username" placeholder="who are you?" required>
+      <label for="password">Password:</label>
+      <input id="password" name="password" required>
+      <button class="form__button" type="submit">Login</button>
+    </form>
+  `
+  );
+}
+
+function signup() {
+  return sharedLayout(
+    `
+    <form class="form" action="login" method="POST">
+      <label for="username">Username:</label>
+      <input id="username" name="username" placeholder="who are you?" required>
+      <label for="password">Password:</label>
+      <input id="password" name="password" required>
+      <button class="form__button" type="submit">Sign Up</button>
+    </form>
+  `
+  );
+}
+
 function submitPage() {
   return sharedLayout(
     `
@@ -82,4 +110,12 @@ function displayUserPosts() {
   `;
 }
 
-module.exports = { submitPage, missingPage, allPosts, home, displayUserPosts };
+module.exports = {
+  submitPage,
+  missingPage,
+  allPosts,
+  home,
+  displayUserPosts,
+  login,
+  signup,
+};
