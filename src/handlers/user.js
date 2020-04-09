@@ -1,4 +1,7 @@
 const templates = require("../template");
+const db = require("../db/connection.js");
+const model = require("../model.js");
+
 const { parse } = require('cookie');
 const { sign, verify } = require('jsonwebtoken');
 const secret = "couvebrocolis";
@@ -27,6 +30,14 @@ function userPageHandler(req, res) {
       } else {
         res.writeHead(200, { "content-type": "text/html" });
         res.end(templates.displayUserPosts());
+
+        // model
+        // .getUserPosts()
+        // .then(result => result.rows)
+        // .then(posts => {
+        //   response.end(templates.displayUserPosts(posts));
+        // })
+        // .catch(console.error);
       }
     });
 }

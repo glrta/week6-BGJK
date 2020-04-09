@@ -30,35 +30,35 @@ function signUpPostHandler(request, response) {
       <p>${error}</p> 
       `);
       });
-  });
-}
 
-function createNewUser() {
-  bcrypt
-    .genSalt(10)
-    .then((salt) => bcrypt.hash(signupObject.password, salt))
-    .then((hash) =>
-      model.createUser({
-        username: signupObject.username, //have a think about refactoring to remove the spread operator
-        password: hash,
-      })
-    )
-    .then(() => {
-      const cookie = sign(signupObject, secret);
-      response.writeHead(302, {
-        location: "/user_page",
-        "Set-Cookie": `jwt=${cookie}; HttpOnly`,
-      });
-      response.end();
-    })
-    .catch((error) => {
-      console.error(error);
-      response.writeHead(500, { "content-type": "text/html" });
-      response.end(`
-                            <h1>Something went wrong, sorry</h1>
-                            <p>${error}</p> 
-                          `);
-    });
+    function createNewUser() {
+      bcrypt
+        .genSalt(10)
+        .then((salt) => bcrypt.hash(signupObject.password, salt))
+        .then((hash) =>
+          model.createUser({
+            username: signupObject.username, //have a think about refactoring to remove the spread operator
+            password: hash,
+          })
+        )
+        .then(() => {
+          const cookie = sign(signupObject, secret);
+          response.writeHead(302, {
+            location: "/user_page",
+            "Set-Cookie": `jwt=${cookie}; HttpOnly`,
+          });
+          response.end();
+        })
+        .catch((error) => {
+          console.error(error);
+          response.writeHead(500, { "content-type": "text/html" });
+          response.end(`
+                                  <h1>Something went wrong, sorry</h1>
+                                  <p>${error}</p> 
+                                `);
+        });
+    }
+  });
 }
 
 module.exports = signUpPostHandler;
