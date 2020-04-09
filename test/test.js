@@ -14,15 +14,14 @@ const {
 
 test("Check to see if createUser adds new username", t => {
   const newUser = {
-    username: "jjj",
+    username: "Donald's_toupee",
     password: "kkk"
   };  
   build().then(() => {
     createUser(newUser)
       .then((result) => {
         const userProfile = result;
-        console.log(userProfile)
-        t.equal(userProfile.rows[0], "Donald's_toupee")
+        t.equal(userProfile.rows[0].username, "Donald's_toupee")
         t.end()
       })
       .catch(error => {
