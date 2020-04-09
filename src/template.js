@@ -57,18 +57,18 @@ function home() {}
 
 
 
-function userDetailForm(button, action, error){
+function userDetailForm(button, action, passwordError, usernameError){
   return sharedLayout(
   `
     <form id=userDetailForm class="form" action=${action} method="POST">
       <label for="username">Username<span aria-hidden="true">*</span>:</label>
       <input id="username" name="username" placeholder="who are you?" required />
-      <div id="usernameError" class="error"></div>
+      <div id="usernameError" class="error">${usernameError}</div>
       <label for="password">Password<span aria-hidden="true">*</span>:</label>
       <p id="passwordRequirements">Password must contain at least one letter, one capital letter, one number, and contain at least 8 characters.
       </p>
       <input type="password" aria-describedby="passwordRequirements" id="password" name="password"  required minlength="8"/>  <!-- pattern="(?=.*[A-z])(?=.*\d)[A-z\d]+" -->
-      <div id="passwordError" class="error">${error ? error : ""}</div>
+      <div id="passwordError" class="error">${passwordError}</div>
       ${button}
     </form>
     <script src="public/script.js"></script>
@@ -76,11 +76,11 @@ function userDetailForm(button, action, error){
   )
 }// regex pattern commented out in html above, because causing issues....revisit later 
 
-function login(error){
- return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', `${error}`);
+function login(passwordError){
+ return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', `${passwordError ? passwordError : '', ''}`);
 }
-function signup(){
-  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup');
+function signup(usernameError){
+  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup', '', `${usernameError ? usernameError : ''}`);
 }
 
 function submitPage() {
