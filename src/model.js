@@ -12,7 +12,7 @@ function getUser(username) {
       `, [username]
     )
     .then(result => {
-      return result.rows //check if this all works
+      return result.rows[0] //check if this all works
     })
     .catch(err => {
       console.log("Here be error   ", err);

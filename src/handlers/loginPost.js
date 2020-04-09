@@ -12,9 +12,8 @@ function loginPostHandler(req, res) {
     model
       .getUser(loginObject.username)
       .then((userObj) => {
-        console.log(userObj[0].password);
-        console.log(loginObject.password);
-       return bcrypt.compare(loginObject.password, userObj[0].password);
+       return userObj.password===loginObject.password; //change to bcrypt once password hashing is working
+        //return bcrypt.compare(loginObject.password, userObj.password);
       })
       .then(match => {
           if(!match) throw new Error('Password mismatch');
@@ -33,48 +32,3 @@ function loginPostHandler(req, res) {
 }
 
 module.exports = loginPostHandler;
-
-// 'POST /login':
-//     const cookie = sign(userDetails, SECRET);
-//     res.writeHead(
-//       302,
-//       {
-//         'Location': '/',
-//         'Set-Cookie': `jwt=${cookie}; HttpOnly`
-//       }
-//     );
-//     return res.end();
-
-// function post(request, response) {
-//     getBody(request)
-//       .then(body => {
-//         const user = new URLSearchParams(body);
-//         const email = user.get("email");
-//         const password = user.get("password");
-//         model
-//           .getUser(email)
-//           .then(dbUser => bcrypt.compare(password, dbUser.password))
-//           .then(match => {
-//             if (!match) throw new Error("Password mismatch");
-//             response.writeHead(200, { "content-type": "text/html" });
-//             response.end(`
-//               <h1>Welcome back, ${email}</h1>
-//             `);
-//           })
-//           .catch(error => {
-//             console.error(error);
-//             response.writeHead(401, { "content-type": "text/html" });
-//             response.end(`
-//               <h1>Something went wrong, sorry</h1>
-//               <p>User not found</p>
-//             `);
-//           });
-//       })
-//       .catch(error => {
-//         console.error(error);
-//         response.writeHead(500, { "content-type": "text/html" });
-//         response.end(`
-//           <h1>Something went wrong, sorry</h1>
-//         `);
-//       });
-//   }
