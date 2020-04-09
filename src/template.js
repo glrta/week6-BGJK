@@ -49,15 +49,15 @@ function makeArticle(obj) {
 }
 
 function allPosts(postObjArr) {
-  let str = postObjArr.map(item => makeArticle(item)).join("\n");
+  let str = postObjArr.map((item) => makeArticle(item)).join("\n");
   return sharedLayout(str);
 }
 
-function home(){
+function home() {}
 
-}
 
-function userDetailForm(button, action){
+
+function userDetailForm(button, action, error){
   return sharedLayout(
   `
     <form id=userDetailForm class="form" action=${action} method="POST">
@@ -68,7 +68,7 @@ function userDetailForm(button, action){
       <p id="passwordRequirements">Password must contain at least one letter, one capital letter, one number, and contain at least 8 characters.
       </p>
       <input type="password" aria-describedby="passwordRequirements" id="password" name="password"  required minlength="8"/>  <!-- pattern="(?=.*[A-z])(?=.*\d)[A-z\d]+" -->
-      <div id="passwordError" class="error"></div>
+      <div id="passwordError" class="error">${error ? error : ""}</div>
       ${button}
     </form>
     <script src="public/script.js"></script>
@@ -76,13 +76,12 @@ function userDetailForm(button, action){
   )
 }// regex pattern commented out in html above, because causing issues....revisit later 
 
-function login(){
- return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login');
+function login(error){
+ return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', `${error}`);
 }
 function signup(){
   return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup');
 }
-
 
 function submitPage() {
   return sharedLayout(
@@ -98,12 +97,24 @@ function submitPage() {
   );
 }
 
-
-
 function missingPage() {
   return `
   <img class="missing-resource-image" src="https://media.giphy.com/media/VwoJkTfZAUBSU/giphy.gif" alt="404 resource not found">
   `;
 }
 
-module.exports = { submitPage, missingPage, allPosts, home, login, signup };
+function displayUserPosts() {
+  return `
+    <h2> Your posts go here </h2>
+  `;
+}
+
+module.exports = {
+  submitPage,
+  missingPage,
+  allPosts,
+  home,
+  displayUserPosts,
+  login,
+  signup,
+};

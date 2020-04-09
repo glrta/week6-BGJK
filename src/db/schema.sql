@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS users, blog_posts CASCADE;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(225) NOT NULL,
-    password VARCHAR(20) NOT NULL
+    password VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE blog_posts (

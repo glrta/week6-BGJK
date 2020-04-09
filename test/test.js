@@ -1,57 +1,46 @@
-const test = require('tape');
-const db = require('../src/db/connection');
-const build = require('../src/db/build');
+const test = require("tape");
+const db = require("../src/db/connection");
+const build = require("../src/db/build");
 
+const { newPost, getPosts, deletePost, createUser } = require("../src/model");
 
-const {
-    newPost,
-    getPosts,
-    deletePost,
-    createUser
-} = require('../src/model');
-
-
-
-test("Check to see if createUser adds new username", t => {
+test("Check to see if createUser adds new username", (t) => {
   const newUser = {
     username: "Donald's_toupee",
-    password: "kkk"
-  };  
+    password: "cheesy",
+  };
   build().then(() => {
     createUser(newUser)
       .then((result) => {
         const userProfile = result;
-        t.equal(userProfile.rows[0].username, "Donald's_toupee")
-        t.end()
+        t.equal(userProfile.rows[0].username, "Donald's_toupee");
+        t.end();
       })
-      .catch(error => {
-        t.error(error)
-        t.end()
-      })   
-    })
+      .catch((error) => {
+        t.error(error);
+        t.end();
+      });
+  });
 });
 
-test("Check to see if username has a corresponding password", t => {
+test("Check to see if username has a corresponding password", (t) => {
   const newUser = {
     username: "Donald's_toupee",
-    password: "cheese"
-  };  
+    password: "cheese",
+  };
   build().then(() => {
     createUser(newUser)
       .then((result) => {
         const userProfile = result;
-        t.equal(userProfile.rows[0].password, "cheese")
-        t.end()
+        t.equal(userProfile.rows[0].password, "cheese");
+        t.end();
       })
-      .catch(error => {
-        t.error(error)
-        t.end()
-      })   
-    })
+      .catch((error) => {
+        t.error(error);
+        t.end();
+      });
+  });
 });
-
-
-
 
 // test('Can get recipe titles!', t => {
 //     build().then(() => {
@@ -73,4 +62,3 @@ test("Check to see if username has a corresponding password", t => {
 //   t.equal("deleteListing" in model , true);
 //   t.end();
 // });
-
