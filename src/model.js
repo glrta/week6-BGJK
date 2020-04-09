@@ -62,4 +62,4 @@ function deletePost(postId, res) {
  
 }
 
-module.exports = { newPost, getPosts, deletePost };
+module.exports = { newPost, getPosts, deletePost, getUser };

@@ -11,7 +11,11 @@ function loginPostHandler(req, res) {
     const loginObject = Object.fromEntries(loginDetails);
     model
       .getUser(loginObject.username)
-      .then((userObj) => bcrypt.compare(loginObject.password, userObj.password))
+      .then((userObj) => {
+        console.log(userObj[0].password);
+        console.log(loginObject.password);
+       return bcrypt.compare(loginObject.password, userObj[0].password);
+      })
       .then(match => {
           if(!match) throw new Error('Password mismatch');
           res.writeHead(302, { location: "/user_page" });

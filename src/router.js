@@ -9,8 +9,8 @@ const loginPostHandler = require('./handlers/loginPost.js');
 const signUpGetHandler = require('./handlers/signupGet.js');
 const logoutHandler = require('./handlers/logout.js');
 const userPageHandler = require('./handlers/user.js');
-const allPostsHandler = require('.handlers/allPosts.js');
-const signUpPostHandler = require('.handlers/signupPost.js');
+const allPostsHandler = require('./handlers/allPosts.js');
+const signUpPostHandler = require('./handlers/signupPost.js');
 
 
 function router(request, response) {
