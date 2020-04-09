@@ -50,32 +50,31 @@ function makeArticle(obj) {
 }
 
 function allPosts(postObjArr) {
-  let str = postObjArr.map(item => makeArticle(item)).join("\n");
+  let str = postObjArr.map((item) => makeArticle(item)).join("\n");
   return sharedLayout(str);
 }
 
-function home(){
+function home() {}
 
-}
-
-function login(){
+function login(error) {
   return sharedLayout(
-  `
+    `
     <form class="form" action="login" method="POST">
       <label for="username">Username:</label>
       <input id="username" name="username" placeholder="who are you?" required>
       <label for="password">Password:</label>
       <input id="password" name="password" required>
+      <div class="form_login-failed">${error ? error : ""}</div>
       <button class="form__button" type="submit">Login</button>
     </form>
   `
-  )
+  );
 }
 
-function signup(){
+function signup() {
   return sharedLayout(
-  `
-    <form class="form" action="login" method="POST">
+    `
+    <form class="form" action="signup" method="POST">
       <label for="username">Username:</label>
       <input id="username" name="username" placeholder="who are you?" required>
       <label for="password">Password:</label>
@@ -83,9 +82,8 @@ function signup(){
       <button class="form__button" type="submit">Sign Up</button>
     </form>
   `
-  )
+  );
 }
-
 
 function submitPage() {
   return sharedLayout(
@@ -101,12 +99,24 @@ function submitPage() {
   );
 }
 
-
-
 function missingPage() {
   return `
   <img class="missing-resource-image" src="https://media.giphy.com/media/VwoJkTfZAUBSU/giphy.gif" alt="404 resource not found">
   `;
 }
 
-module.exports = { submitPage, missingPage, allPosts, home, login, signup };
+function displayUserPosts() {
+  return `
+    <h2> Your posts go here </h2>
+  `;
+}
+
+module.exports = {
+  submitPage,
+  missingPage,
+  allPosts,
+  home,
+  displayUserPosts,
+  login,
+  signup,
+};
