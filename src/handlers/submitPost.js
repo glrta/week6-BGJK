@@ -1,5 +1,8 @@
 const templates = require("../template");
 const model = require("../model");
+const { parse } = require('cookie');
+const { sign, verify } = require('jsonwebtoken');
+const secret = "couvebrocolis";
 
 function submitPostHandler(req, res) {
   let body = "";
@@ -7,13 +10,21 @@ function submitPostHandler(req, res) {
   req.on("end", () => {
     const message = new URLSearchParams(body);
     const messageObject = Object.fromEntries(message);
-    model
-      .newPost(messageObject)
-      .then(() => {
-        res.writeHead(302, { location: "/all_posts" });
-        res.end();
-      })
-      .catch(err => console.error(err));
+    const { jwt } = parse(req.headers.cookie);
+    verify(jwt, secret, (err, jwt) => {
+      console.log(jwt)
+      if (err) {
+        return send401();
+      } else {
+        model
+          .newPost(jwt.username, messageObject)
+          .then(() => {
+            res.writeHead(302, { location: "/all_posts" });
+            res.end();
+          })
+          .catch(err => console.error(err));
+      }
+    });
   });
 }
 

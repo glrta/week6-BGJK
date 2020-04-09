@@ -101,8 +101,7 @@ function submitPage() {
   return sharedLayout(
     `
     <form class="form" action="submit" method="POST">
-      <label for="username">Author: </label>
-      <input id="username" name="username" placeholder="who are you?" required />
+      
       <label for="post_text">Write Post</label>
       <textarea id="post_text" rows="10" cols="50" name="post_text" aria-label="write blog here" placeholder="what are you thinking about?" required></textarea>
       <button class="form__button" type="submit">Add Post</button>
