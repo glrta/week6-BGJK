@@ -50,13 +50,11 @@ function makeArticle(obj) {
 }
 
 function allPosts(postObjArr) {
-  let str = postObjArr.map(item => makeArticle(item)).join("\n");
+  let str = postObjArr.map((item) => makeArticle(item)).join("\n");
   return sharedLayout(str);
 }
 
-function home(){
-  
-}
+function home() {}
 
 function submitPage() {
   return sharedLayout(
@@ -78,4 +76,10 @@ function missingPage() {
   `;
 }
 
-module.exports = { submitPage, missingPage, allPosts, home };
+function displayUserPosts() {
+  return `
+    <h2> Your posts go here </h2>
+  `;
+}
+
+module.exports = { submitPage, missingPage, allPosts, home, displayUserPosts };
