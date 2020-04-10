@@ -137,19 +137,16 @@ function allPosts(postObjArr) {
   return sharedLayout(str);
 }
 
-function displayUserPosts() {
-  return `
-    <h2> Your posts go here </h2>
+function displayUserPosts(postObjArr) {
+  let str2 = `
     <form action='/logout' method='POST'>
     <button type="submit">Logout</button>
     </form>
-  `;
+  `; 
+  let str = postObjArr.map((item) => makeArticle(item)).join("\n");
+  str = str + str2; 
+  return sharedLayout(str);
 }
-
-// function displayUserPosts(postObjArr) {
-//   let str = postObjArr.map((item) => makeArticle(item)).join("\n");
-//   return sharedLayout(str);
-// }
 
 module.exports = {
   submitPage,

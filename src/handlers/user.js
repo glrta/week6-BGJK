@@ -8,34 +8,41 @@ const secret = "couvebrocolis";
 
 function userPageHandler(req, res) {
   const send401 = () => {
-    const message = "Not Authorised!";
-    res.writeHead(401, {
-      "Content-Type": "text/html"
-    });
+    const message = 'Not Authorised!';
+    res.writeHead(
+      401,
+      {
+        'Content-Type': 'text/html',
+      }
+    );
     return res.end(templates.errorPage(message));
-  };
+  }
 
-  if (!req.headers.cookie) return send401();
+    if (!req.headers.cookie) return send401();
 
-  const { jwt } = parse(req.headers.cookie);
+    const { jwt } = parse(req.headers.cookie)
 
-  if (!jwt) return send401();
+    if (!jwt) return send401();
 
-  return verify(jwt, secret, (err, jwt) => {
-    // console.log(jwt)
-    if (err) {
-      return send401();
-    } else {
-      res.writeHead(200, { "content-type": "text/html" });
-      res.end();
-      // model
-      // .getUserPosts(jwt.username)
-      // .then(result => result.rows)
-      // .then(posts => {
-      //   res.end(templates.displayUserPosts(posts));
-      // })
-      // .catch(console.error);
-    }
+    return verify(jwt, secret, (err, jwt) => {
+      //console.log(jwt)
+      if (err) {
+        return send401();
+      } else {
+        res.writeHead(200, { "content-type": "text/html" });
+        model
+        .getUserPosts(jwt.username)
+        .then((result)=>
+          {
+            console.log(result.rows[0]);
+            return result.rows        
+          }
+        )
+        .then(posts => {
+          return res.end(templates.displayUserPosts(posts));
+        }) 
+        .catch(console.error);
+      }
   });
 }
 
