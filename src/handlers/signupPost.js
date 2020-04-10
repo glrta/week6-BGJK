@@ -10,8 +10,7 @@ function signUpPostHandler(request, response) {
   request.on("data", (chunk) => (body += chunk));
   request.on("end", () => {
     const signupDetails = new URLSearchParams(body);
-    const signupObject = Object.fromEntries(signupDetails);
-    const signupUsername = signupObject.username;
+    const signupUsername = signupDetails.get("username");
     model
       .getUser(signupUsername)
       .then((user) => {

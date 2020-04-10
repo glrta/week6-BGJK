@@ -71,7 +71,7 @@ function home() {
   return sharedLayout(cookieStr);
 }
 
-function userDetailForm(button, action, passwordError, usernameError){
+function userDetailForm(button, action, passwordError, usernameError) {
   return sharedLayout(
     `
     <form id=userDetailForm class="form" action=${action} method="POST">
@@ -87,14 +87,24 @@ function userDetailForm(button, action, passwordError, usernameError){
     </form>
     <script src="public/script.js"></script>
   `
-  )
-} // regex pattern commented out in html above, because causing issues....revisit later 
+  );
+} // regex pattern commented out in html above, because causing issues....revisit later
 
-function login(passwordError){
- return userDetailForm(`<button class="form__button" type="submit">Login</button>`, '/login', `${passwordError ? passwordError : ''}`, '');
+function login(passwordError) {
+  return userDetailForm(
+    `<button class="form__button" type="submit">Login</button>`,
+    "/login",
+    `${passwordError ? passwordError : ""}`,
+    ""
+  );
 }
-function signup(usernameError){
-  return userDetailForm(`<button class="form__button" type="submit">Sign Up</button>`, '/signup', '', `${usernameError ? usernameError : ''}`);
+function signup(usernameError) {
+  return userDetailForm(
+    `<button class="form__button" type="submit">Sign Up</button>`,
+    "/signup",
+    "",
+    `${usernameError ? usernameError : ""}`
+  );
 }
 
 function submitPage() {
@@ -116,8 +126,14 @@ function missingPage() {
   `;
 }
 
+function errorPage(message) {
+  return `<h1>${message}</h1>
+  <a href="/" class="navbar__links" aria-label="Home page">Home</a>
+  `;
+}
+
 function allPosts(postObjArr) {
-  let str = postObjArr.map((item) => makeArticle(item)).join("\n");
+  let str = postObjArr.map(item => makeArticle(item)).join("\n");
   return sharedLayout(str);
 }
 
@@ -135,6 +151,7 @@ function displayUserPosts(postObjArr) {
 module.exports = {
   submitPage,
   missingPage,
+  errorPage,
   allPosts,
   home,
   displayUserPosts,
