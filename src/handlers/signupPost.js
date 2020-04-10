@@ -10,9 +10,10 @@ function signUpPostHandler(request, response) {
   request.on("data", (chunk) => (body += chunk));
   request.on("end", () => {
     const signupDetails = new URLSearchParams(body);
-    const signupUsername = signupDetails.get("username");
+    const signupObject = Object.fromEntries(signupDetails);
+   
     model
-      .getUser(signupUsername)
+      .getUser(signupObject.username)
       .then((user) => {
         if (user) {
           response.writeHead(200, { "content-type": "text/html" });
