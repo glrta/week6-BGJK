@@ -2,8 +2,8 @@ const templates = require("../template");
 const db = require("../db/connection.js");
 const model = require("../model.js");
 
-const { parse } = require('cookie');
-const { sign, verify } = require('jsonwebtoken');
+const { parse } = require("cookie");
+const { sign, verify } = require("jsonwebtoken");
 const secret = "couvebrocolis";
 
 function userPageHandler(req, res) {
@@ -15,7 +15,7 @@ function userPageHandler(req, res) {
         'Content-Type': 'text/html',
       }
     );
-    return res.end(`<h2>${message}</h2>`);
+    return res.end(templates.errorPage(message));
   }
 
     if (!req.headers.cookie) return send401();
@@ -25,13 +25,11 @@ function userPageHandler(req, res) {
     if (!jwt) return send401();
 
     return verify(jwt, secret, (err, jwt) => {
-      console.log(jwt)
-      // if (err) {
-      //   return send401();
-      // } else {
-      //   res.writeHead(200, { "content-type": "text/html" });
-      //   res.end(tempates.displayUserPosts()); 
-      // }
+      //console.log(jwt)
+      if (err) {
+        return send401();
+      } else {
+        res.writeHead(200, { "content-type": "text/html" });
         model
         .getUserPosts(jwt.username)
         .then((result)=>
@@ -42,14 +40,10 @@ function userPageHandler(req, res) {
         )
         .then(posts => {
           return res.end(templates.displayUserPosts(posts));
-        })
+        }) 
         .catch(console.error);
-      
-    });
+      }
+  });
 }
 
 module.exports = userPageHandler;
-
-  
-
- 
