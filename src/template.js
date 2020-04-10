@@ -122,13 +122,13 @@ function allPosts(postObjArr) {
 }
 
 function displayUserPosts(postObjArr) {
-  // return `
+  // return sharedLayout(`
   //   <h2> Your posts go here </h2>
   //   <form action='/logout' method='POST'>
   //   <button type="submit">Logout</button>
   //   </form>
-  // `;
-  // if (postObjArr)q
+  // `);
+  
   let str = postObjArr.map((item) => makeArticle(item)).join("\n");
   return sharedLayout(str);
 }

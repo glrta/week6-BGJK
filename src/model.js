@@ -51,13 +51,14 @@ function getUserPosts(user) {
   return db
   .query(`SELECT id FROM users where username=($1)`, [user])
   .then((userId) => {
+    //console.log("userid", userId.rows[0].id);
     return db.query(
         `
           SELECT *
           FROM blog_posts
           INNER JOIN users ON users.id = blog_posts.author_id
           WHERE users.id=($1)`,
-          [userId]
+          [userId.rows[0].id]
     ).catch(console.err)
   })
     .catch((err) => {

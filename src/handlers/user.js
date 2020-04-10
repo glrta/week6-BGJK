@@ -25,11 +25,13 @@ function userPageHandler(req, res) {
     if (!jwt) return send401();
 
     return verify(jwt, secret, (err, jwt) => {
-      // console.log(jwt)
-      if (err) {
-        return send401();
-      } else {
-        res.writeHead(200, { "content-type": "text/html" });
+      console.log(jwt)
+      // if (err) {
+      //   return send401();
+      // } else {
+      //   res.writeHead(200, { "content-type": "text/html" });
+      //   res.end(tempates.displayUserPosts()); 
+      // }
         model
         .getUserPosts(jwt.username)
         .then((result)=>
@@ -38,11 +40,11 @@ function userPageHandler(req, res) {
             return result.rows        
           }
         )
-        // .then(posts => {
-        //   return res.end(templates.displayUserPosts(posts));
-        // })
+        .then(posts => {
+          return res.end(templates.displayUserPosts(posts));
+        })
         .catch(console.error);
-      }
+      
     });
 }
 
