@@ -30,14 +30,18 @@ function userPageHandler(req, res) {
         return send401();
       } else {
         res.writeHead(200, { "content-type": "text/html" });
-        res.end();
-        // model
-        // .getUserPosts(jwt.username)
-        // .then(result => result.rows)
+        model
+        .getUserPosts(jwt.username)
+        .then((result)=>
+          {
+            console.log(result.rows[0]);
+            return result.rows        
+          }
+        )
         // .then(posts => {
-        //   res.end(templates.displayUserPosts(posts));
+        //   return res.end(templates.displayUserPosts(posts));
         // })
-        // .catch(console.error);
+        .catch(console.error);
       }
     });
 }
