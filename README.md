@@ -4,6 +4,10 @@ At [Founders and Coders](https://www.foundersandcoders.com/about/) coding bootca
 
 __Week 6 topic__: Authentication
 
+See [week 6 schedule](https://founders-and-coders.gitbook.io/coursebook/week-6/schedule).
+
+---
+
 # The cookie jar
 
 
