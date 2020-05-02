@@ -1,3 +1,9 @@
+# FAC19 week 6 project
+
+At [Founders and Coders](https://www.foundersandcoders.com/about/) coding bootcamp we are tasked every week with a different project. A MVP is built in 1.5 days by 4 developers that follow the Agile methodology.
+
+__Week 6 topic__: Authentication
+
 # The cookie jar
 
 
