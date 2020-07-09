@@ -4,12 +4,13 @@ At [Founders and Coders](https://www.foundersandcoders.com/about/) coding bootca
 
 __Week 6 topic__: Authentication
 
+---
+
 See [week 6 schedule](https://founders-and-coders.gitbook.io/coursebook/week-6/schedule).
 
 ---
 
 # The cookie jar
-
 
 ## Installation Guide
 * git clone this repo
@@ -18,3 +19,5 @@ See [week 6 schedule](https://founders-and-coders.gitbook.io/coursebook/week-6/s
 * Create .env file in project route
 * Add PGDATABASE variable in your .env file and assign to initialised database
 * `npm run dev` will start nodemon server
+
+![screenshot](screenshot.png)
