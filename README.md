@@ -18,3 +18,5 @@ See [week 6 schedule](https://founders-and-coders.gitbook.io/coursebook/week-6/s
 * Create .env file in project route
 * Add PGDATABASE variable in your .env file and assign to initialised database
 * `npm run dev` will start nodemon server
+
+![screenshot](screenshot.png)
